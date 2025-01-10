@@ -12,20 +12,20 @@ import 'settings.dart';
 ///
 /// It makes both a solid ground for actual implementation (by defining what
 /// features they implement), and some basic info for easy simulation
-abstract base class HuaweiFreeBuds4i
+abstract base class HuaweiFreeBudsPro3
     implements
         BluetoothHeadphones,
         HeadphonesModelInfo,
         LRCBattery,
         Anc,
-        HeadphonesSettings<HuaweiFreeBuds4iSettings> {
-  const HuaweiFreeBuds4i();
+        HeadphonesSettings<HuaweiFreeBudsPro3Settings> {
+  const HuaweiFreeBudsPro3();
 
   @override
   String get vendor => "Huawei";
 
   @override
-  String get name => "FreeBuds 4i";
+  String get name => "FreeBuds Pro 3";
 
   // NOTE/WARNING: Again as in HeadphonesModelInfo - i'm not sure if it's safe
   // to just leave it like that, but I will 🥰🥰
@@ -36,5 +36,5 @@ abstract base class HuaweiFreeBuds4i
   // As I said everywhere else - i have no good idea where to put this stuff :/
   // This will be a bit of chaos for now 👍👍
   static final idNameRegex =
-      RegExp(r'^(?=(HUAWEI FreeBuds 4i))', caseSensitive: true);
+      RegExp(r'^(?=(HUAWEI FreeBuds Pro 3))', caseSensitive: true);
 }

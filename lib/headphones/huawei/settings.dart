@@ -1,6 +1,6 @@
 import '../framework/anc.dart';
 
-class HuaweiFreeBuds4iSettings {
+class HuaweiFreeBudsPro3Settings {
   // hey hey hay, not only settings are gonna be duplicate spaghetti shithole,
   // but all the fields are gonna be nullable too!
   final DoubleTap? doubleTapLeft;
@@ -10,7 +10,7 @@ class HuaweiFreeBuds4iSettings {
 
   final bool? autoPause;
 
-  const HuaweiFreeBuds4iSettings({
+  const HuaweiFreeBudsPro3Settings({
     this.doubleTapLeft,
     this.doubleTapRight,
     this.holdBoth,
@@ -19,14 +19,14 @@ class HuaweiFreeBuds4iSettings {
   });
 
   // don't want to use codegen *yet*
-  HuaweiFreeBuds4iSettings copyWith({
+  HuaweiFreeBudsPro3Settings copyWith({
     DoubleTap? doubleTapLeft,
     DoubleTap? doubleTapRight,
     Hold? holdBoth,
     Set<AncMode>? holdBothToggledAncModes,
     bool? autoPause,
   }) =>
-      HuaweiFreeBuds4iSettings(
+      HuaweiFreeBudsPro3Settings(
         doubleTapLeft: doubleTapLeft ?? this.doubleTapLeft,
         doubleTapRight: doubleTapRight ?? this.doubleTapRight,
         holdBoth: holdBoth ?? this.holdBoth,
@@ -42,7 +42,7 @@ class HuaweiFreeBuds3iSettings {
   final DoubleTap? doubleTapLeft;
   final DoubleTap? doubleTapRight;
 
-  // those are luckily same as 4i
+  // those are luckily same as Pro3
   final Hold? holdBoth;
   final Set<AncMode>? holdBothToggledAncModes;
 

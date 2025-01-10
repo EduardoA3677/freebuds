@@ -6,9 +6,9 @@ import 'package:the_last_bluetooth/the_last_bluetooth.dart';
 import '../framework/bluetooth_headphones.dart';
 import '../huawei/freebuds3i.dart';
 import '../huawei/freebuds3i_impl.dart';
-import '../huawei/freebuds4i.dart';
-import '../huawei/freebuds4i_impl.dart';
-import '../huawei/freebuds4i_sim.dart';
+import '../huawei/freebudspro3.dart';
+import '../huawei/freebudspro3_impl.dart';
+import '../huawei/freebudspro3_sim.dart';
 import '../huawei/mbb.dart';
 
 typedef HeadphonesBuilder = BluetoothHeadphones Function(
@@ -22,13 +22,13 @@ typedef MatchedModel = ({
 MatchedModel? matchModel(BluetoothDevice matchedDevice) {
   final name = matchedDevice.name.value;
   return switch (name) {
-    _ when HuaweiFreeBuds4i.idNameRegex.hasMatch(name) => (
-        builder: (io, dev) => HuaweiFreeBuds4iImpl(mbbChannel(io), dev),
-        placeholder: const HuaweiFreeBuds4iSimPlaceholder(),
+    _ when HuaweiFreeBudsPro3.idNameRegex.hasMatch(name) => (
+        builder: (io, dev) => HuaweiFreeBudsPro3Impl(mbbChannel(io), dev),
+        placeholder: const HuaweiFreeBudsPro3SimPlaceholder(),
       ) as MatchedModel,
     _ when HuaweiFreeBuds3i.idNameRegex.hasMatch(name) => (
         builder: (io, dev) => HuaweiFreeBuds3iImpl(mbbChannel(io), dev),
-        placeholder: const HuaweiFreeBuds4iSimPlaceholder(),
+        placeholder: const HuaweiFreeBudsPro3SimPlaceholder(),
       ) as MatchedModel,
     _ => null,
   };

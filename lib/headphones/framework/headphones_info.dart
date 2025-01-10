@@ -5,12 +5,12 @@ import 'package:rxdart/rxdart.dart';
 /// For example, FreeBuds 4i would implement it like:
 ///
 /// ```dart
-/// class HuaweiFreeBuds4i implements HeadphonesModelInfo {
+/// class HuaweiFreeBudsPro3 implements HeadphonesModelInfo {
 ///   @override
 ///   String get vendor => "Huawei";
 ///
 ///   @override
-///   String get name => "FreeBuds 4i";
+///   String get name => "FreeBuds Pro 3";
 /// }
 /// ```
 abstract class HeadphonesModelInfo {

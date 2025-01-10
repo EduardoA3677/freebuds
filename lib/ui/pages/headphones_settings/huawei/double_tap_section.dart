@@ -8,7 +8,7 @@ import '../../../common/list_tile_switch.dart';
 import '../../disabled.dart';
 
 class DoubleTapSection extends StatelessWidget {
-  final HeadphonesSettings<HuaweiFreeBuds4iSettings> headphones;
+  final HeadphonesSettings<HuaweiFreeBudsPro3Settings> headphones;
 
   const DoubleTapSection(this.headphones, {super.key});
 
@@ -35,7 +35,7 @@ class DoubleTapSection extends StatelessWidget {
               onChanged: (newVal) {
                 final g = newVal ? DoubleTap.playPause : DoubleTap.nothing;
                 headphones.setSettings(
-                  HuaweiFreeBuds4iSettings(doubleTapLeft: g, doubleTapRight: g),
+                  HuaweiFreeBudsPro3Settings(doubleTapLeft: g, doubleTapRight: g),
                 );
               },
             ),
@@ -54,7 +54,7 @@ class DoubleTapSection extends StatelessWidget {
                         value: dt.l,
                         onChanged: enabled
                             ? (g) => headphones.setSettings(
-                                  HuaweiFreeBuds4iSettings(doubleTapLeft: g),
+                                  HuaweiFreeBudsPro3Settings(doubleTapLeft: g),
                                 )
                             : null,
                       ),
@@ -68,7 +68,7 @@ class DoubleTapSection extends StatelessWidget {
                         value: dt.r,
                         onChanged: enabled
                             ? (g) => headphones.setSettings(
-                                  HuaweiFreeBuds4iSettings(doubleTapRight: g),
+                                  HuaweiFreeBudsPro3Settings(doubleTapRight: g),
                                 )
                             : null,
                       ),

@@ -9,7 +9,7 @@ import '../../../common/list_tile_switch.dart';
 import '../../disabled.dart';
 
 class HoldSection extends StatelessWidget {
-  final HeadphonesSettings<HuaweiFreeBuds4iSettings> headphones;
+  final HeadphonesSettings<HuaweiFreeBudsPro3Settings> headphones;
 
   const HoldSection(this.headphones, {super.key});
 
@@ -30,7 +30,7 @@ class HoldSection extends StatelessWidget {
               subtitle: Text(l.pageHeadphonesSettingsHoldDesc),
               value: enabled,
               onChanged: (newVal) => headphones.setSettings(
-                HuaweiFreeBuds4iSettings(
+                HuaweiFreeBudsPro3Settings(
                   holdBoth: newVal ? Hold.cycleAnc : Hold.nothing,
                 ),
               ),
@@ -40,7 +40,7 @@ class HoldSection extends StatelessWidget {
               child: _HoldSettingsCard(
                 enabledModes: MapEntry(gs.holdBoth, gs.anc),
                 onChanged: (m) => headphones.setSettings(
-                  HuaweiFreeBuds4iSettings(
+                  HuaweiFreeBudsPro3Settings(
                     holdBoth: m.key,
                     holdBothToggledAncModes: m.value,
                   ),

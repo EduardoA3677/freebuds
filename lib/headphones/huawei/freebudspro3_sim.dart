@@ -4,15 +4,15 @@ import '../framework/anc.dart';
 import '../simulators/anc_sim.dart';
 import '../simulators/bluetooth_headphones_sim.dart';
 import '../simulators/lrc_battery_sim.dart';
-import 'freebuds4i.dart';
+import 'freebudspro3.dart';
 import 'settings.dart';
 
-final class HuaweiFreeBuds4iSim extends HuaweiFreeBuds4i
+final class HuaweiFreeBudsPro3Sim extends HuaweiFreeBudsPro3
     with BluetoothHeadphonesSim, LRCBatteryAlwaysFullSim, AncSim {
   // ehhhhhh...
 
-  final _settingsCtrl = BehaviorSubject<HuaweiFreeBuds4iSettings>.seeded(
-    const HuaweiFreeBuds4iSettings(
+  final _settingsCtrl = BehaviorSubject<HuaweiFreeBudsPro3Settings>.seeded(
+    const HuaweiFreeBudsPro3Settings(
       doubleTapLeft: DoubleTap.playPause,
       doubleTapRight: DoubleTap.playPause,
       holdBoth: Hold.cycleAnc,
@@ -26,10 +26,10 @@ final class HuaweiFreeBuds4iSim extends HuaweiFreeBuds4i
   );
 
   @override
-  ValueStream<HuaweiFreeBuds4iSettings> get settings => _settingsCtrl.stream;
+  ValueStream<HuaweiFreeBudsPro3Settings> get settings => _settingsCtrl.stream;
 
   @override
-  Future<void> setSettings(HuaweiFreeBuds4iSettings newSettings) async {
+  Future<void> setSettings(HuaweiFreeBudsPro3Settings newSettings) async {
     _settingsCtrl.add(
       _settingsCtrl.value.copyWith(
         doubleTapLeft: newSettings.doubleTapLeft,
@@ -48,16 +48,16 @@ final class HuaweiFreeBuds4iSim extends HuaweiFreeBuds4i
 // all of this
 //
 // ...or not. I just don't know yet 🤷
-final class HuaweiFreeBuds4iSimPlaceholder extends HuaweiFreeBuds4i
+final class HuaweiFreeBudsPro3SimPlaceholder extends HuaweiFreeBudsPro3
     with
         BluetoothHeadphonesSimPlaceholder,
         LRCBatteryAlwaysFullSimPlaceholder,
         AncSimPlaceholder {
-  const HuaweiFreeBuds4iSimPlaceholder();
+  const HuaweiFreeBudsPro3SimPlaceholder();
 
   @override
-  ValueStream<HuaweiFreeBuds4iSettings> get settings => BehaviorSubject();
+  ValueStream<HuaweiFreeBudsPro3Settings> get settings => BehaviorSubject();
 
   @override
-  Future<void> setSettings(HuaweiFreeBuds4iSettings newSettings) async {}
+  Future<void> setSettings(HuaweiFreeBudsPro3Settings newSettings) async {}
 }

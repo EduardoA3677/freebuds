@@ -6,7 +6,7 @@ import '../../../../headphones/huawei/settings.dart';
 import '../../../common/list_tile_switch.dart';
 
 class AutoPauseSection extends StatelessWidget {
-  final HeadphonesSettings<HuaweiFreeBuds4iSettings> headphones;
+  final HeadphonesSettings<HuaweiFreeBudsPro3Settings> headphones;
 
   const AutoPauseSection(this.headphones, {super.key});
 
@@ -22,7 +22,7 @@ class AutoPauseSection extends StatelessWidget {
           subtitle: Text(l.autoPauseDesc),
           value: snap.data ?? false,
           onChanged: (newVal) => headphones.setSettings(
-            HuaweiFreeBuds4iSettings(autoPause: newVal),
+            HuaweiFreeBudsPro3Settings(autoPause: newVal),
           ),
         );
       },

@@ -30,7 +30,7 @@ class HeadphonesSettingsPage extends StatelessWidget {
 // ...
 // but i have no better idea for now :)))))
 List<Widget> widgetsForModel(HeadphonesSettings settings) {
-  if (settings is HeadphonesSettings<HuaweiFreeBuds4iSettings>) {
+  if (settings is HeadphonesSettings<HuaweiFreeBudsPro3Settings>) {
     return [
       AutoPauseSection(settings),
       const Divider(indent: 16, endIndent: 16),

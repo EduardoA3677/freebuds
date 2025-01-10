@@ -4,26 +4,26 @@ import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:freebuddy/headphones/framework/anc.dart';
 import 'package:freebuddy/headphones/framework/lrc_battery.dart';
-import 'package:freebuddy/headphones/huawei/freebuds4i_impl.dart';
+import 'package:freebuddy/headphones/huawei/freebudspro3_impl.dart';
 import 'package:freebuddy/headphones/huawei/mbb.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:stream_channel/stream_channel.dart';
 import 'package:the_last_bluetooth/the_last_bluetooth.dart';
 
 void main() {
-  group("FreeBuds 4i implementation tests", () {
+  group("FreeBuds Pro 3 implementation tests", () {
     // test with keyword "info" test if impl reacts to info *from* buds
     // ones with "set" test if impl sends correct bytes *to* buds
 
     late StreamController<Uint8List> inputCtrl;
     late StreamController<Uint8List> outputCtrl;
     late StreamChannel<Uint8List> channel;
-    late HuaweiFreeBuds4iImpl fb4i;
+    late HuaweiFreeBudsPro3Impl fbPro3;
     setUp(() {
       inputCtrl = StreamController<Uint8List>.broadcast();
       outputCtrl = StreamController<Uint8List>();
       channel = StreamChannel<Uint8List>(inputCtrl.stream, outputCtrl.sink);
-      fb4i = HuaweiFreeBuds4iImpl(mbbChannel(channel), const FakeBtDev());
+      fbPro3 = HuaweiFreeBudsPro3Impl(mbbChannel(channel), const FakeBtDev());
     });
     tearDown(() {
       inputCtrl.close();
@@ -39,7 +39,7 @@ void main() {
       );
     });
     test("ANC mode set", () async {
-      await fb4i.setAncMode(AncMode.noiseCancelling);
+      await fbPro3.setAncMode(AncMode.noiseCancelling);
       expect(
         outputCtrl.stream.bytesToList(),
         emitsThrough([90, 0, 7, 0, 43, 4, 1, 2, 1, 255, 255, 236]),
@@ -64,7 +64,7 @@ void main() {
         inputCtrl.add(c.toPayload());
       }
       expect(
-        fb4i.ancMode,
+        fbPro3.ancMode,
         emitsInOrder([
           AncMode.noiseCancelling,
           AncMode.off,
@@ -80,16 +80,16 @@ void main() {
         3: [1, 0, 1]
       }).toPayload());
       expect(
-        fb4i.lrcBattery,
+        fbPro3.lrcBattery,
         emits(const LRCBatteryLevels(35, 70, 99, true, false, true)),
       );
     });
     test("Properly closes", () async {
       expectLater(
-        fb4i.ancMode,
+        fbPro3.ancMode,
         emitsInOrder([AncMode.noiseCancelling, emitsDone]),
       );
-      expectLater(fb4i.lrcBattery, emitsDone);
+      expectLater(fbPro3.lrcBattery, emitsDone);
       inputCtrl.add(const MbbCommand(43, 42, {
         1: [4, 1]
       }).toPayload());
@@ -115,7 +115,7 @@ class FakeBtDev implements BluetoothDevice {
 
   @override
   ValueStream<String> get name =>
-      Stream.value("HUAWEI FreeBuds 4i").shareValue();
+      Stream.value("HUAWEI FreeBuds Pro 3").shareValue();
 
   @override
   Future<Set<String>> get uuids => Future.value({});

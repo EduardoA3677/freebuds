@@ -8,11 +8,11 @@ import 'package:the_last_bluetooth/the_last_bluetooth.dart' as tlb;
 import '../../logger.dart';
 import '../framework/anc.dart';
 import '../framework/lrc_battery.dart';
-import 'freebuds4i.dart';
+import 'freebudspro3.dart';
 import 'mbb.dart';
 import 'settings.dart';
 
-final class HuaweiFreeBuds4iImpl extends HuaweiFreeBuds4i {
+final class HuaweiFreeBudsPro3Impl extends HuaweiFreeBudsPro3 {
   final tlb.BluetoothDevice _bluetoothDevice;
 
   /// Bluetooth serial port that we communicate over
@@ -24,14 +24,14 @@ final class HuaweiFreeBuds4iImpl extends HuaweiFreeBuds4i {
   final _bluetoothNameCtrl = BehaviorSubject<String>();
   final _lrcBatteryCtrl = BehaviorSubject<LRCBatteryLevels>();
   final _ancModeCtrl = BehaviorSubject<AncMode>();
-  final _settingsCtrl = BehaviorSubject<HuaweiFreeBuds4iSettings>();
+  final _settingsCtrl = BehaviorSubject<HuaweiFreeBudsPro3Settings>();
 
   // stream controllers *
 
   /// This watches if we are still missing any info and re-requests it
   late StreamSubscription _watchdogStreamSub;
 
-  HuaweiFreeBuds4iImpl(this._mbb, this._bluetoothDevice) {
+  HuaweiFreeBudsPro3Impl(this._mbb, this._bluetoothDevice) {
     // hope this will nicely play with closing, idk honestly
     final aliasStreamSub = _bluetoothDevice.alias
         .listen((alias) => _bluetoothAliasCtrl.add(alias));
@@ -75,7 +75,7 @@ final class HuaweiFreeBuds4iImpl extends HuaweiFreeBuds4i {
 
   void _evalMbbCommand(MbbCommand cmd) {
     final lastSettings =
-        _settingsCtrl.valueOrNull ?? const HuaweiFreeBuds4iSettings();
+        _settingsCtrl.valueOrNull ?? const HuaweiFreeBudsPro3Settings();
     switch (cmd.args) {
       // # AncMode
       case {1: [_, var ancModeCode, ...]} when cmd.isAbout(_Cmd.getAnc):
@@ -169,11 +169,11 @@ final class HuaweiFreeBuds4iImpl extends HuaweiFreeBuds4i {
   Future<void> setAncMode(AncMode mode) async => _mbb.sink.add(_Cmd.anc(mode));
 
   @override
-  ValueStream<HuaweiFreeBuds4iSettings> get settings => _settingsCtrl.stream;
+  ValueStream<HuaweiFreeBudsPro3Settings> get settings => _settingsCtrl.stream;
 
   @override
   Future<void> setSettings(newSettings) async {
-    final prev = _settingsCtrl.valueOrNull ?? const HuaweiFreeBuds4iSettings();
+    final prev = _settingsCtrl.valueOrNull ?? const HuaweiFreeBudsPro3Settings();
     // this is VERY much a boilerplate
     // ...and, bloat...
     // and i don't think there is a need to export it somewhere else 🤷,
@@ -281,7 +281,7 @@ abstract class _Cmd {
       });
 }
 
-extension _FB4iAncMode on AncMode {
+extension _FBPro3AncMode on AncMode {
   int get mbbCode => switch (this) {
         AncMode.noiseCancelling => 1,
         AncMode.off => 0,
@@ -289,7 +289,7 @@ extension _FB4iAncMode on AncMode {
       };
 }
 
-extension _FB4iDoubleTap on DoubleTap {
+extension _FBPro3DoubleTap on DoubleTap {
   int get mbbCode => switch (this) {
         DoubleTap.nothing => 255,
         DoubleTap.voiceAssistant => 0,
@@ -299,7 +299,7 @@ extension _FB4iDoubleTap on DoubleTap {
       };
 }
 
-extension _FB4iHold on Hold {
+extension _FBPro3Hold on Hold {
   int get mbbCode => switch (this) {
         Hold.nothing => 255,
         Hold.cycleAnc => 10,
